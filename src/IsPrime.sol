@@ -6,9 +6,15 @@ contract IsPrime {
         assembly {
             // your code here
             // return true if x is a prime number, else false
-            // 1. check if the number is a multiple of 2 or 3
-            // 2. loop from 5 to x / 2 to see if it is divisible
-            // 3. increment the loop by 2 to skip the even numbers
+
+            if eq(x, 1) { return(0x00, 0x20) }
+            if iszero(mul(mod(x, 2), mod(x, 3))) { return(0x00, 0x20) }
+
+            let lim := div(x, 2)
+            for { let i := 5 } lt(i, lim) { i := add(i, 2) } { if iszero(mod(x, i)) { return(0x00, 0x20) } }
+
+            mstore(0x00, 0x01)
+            return(0x00, 0x20)
         }
     }
 }

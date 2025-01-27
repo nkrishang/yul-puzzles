@@ -14,6 +14,7 @@ contract ReturnStringTest is Test {
     function test_ReturnString() public {
         string memory r = c.main();
 
-        assertEq(keccak256(abi.encode(r)), keccak256(abi.encode("Hello, RareSkills")));
+        assertEq(abi.encode(r), abi.encode("Hello, RareSkills"));
+        // assertEq(keccak256(abi.encode(r)), keccak256(abi.encode("Hello, RareSkills")));
     }
 }

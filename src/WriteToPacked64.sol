@@ -12,6 +12,11 @@ contract WriteToPacked64 {
             // your code here
             // change the value of `writeHere` storage variable to `v`
             // be careful not to alter the value of `someValue` variable
+
+            let mask := 0xffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff
+            let temp := and(sload(0), mask)
+
+            sstore(0, or(temp, shl(0x40, v)))
         }
     }
 }

@@ -29,6 +29,19 @@ contract AnonymonusEventWithComplexData {
             //          - gender
             //          - name length
             //          - name
+
+            let nameOffset := mload(person)
+            let nameLenOffset := mload(add(nameOffset, person))
+            let nameLen := mload(add(nameOffset, nameLenOffset))
+
+            mstore(0x00, 0x20)
+            mstore(0x20, 0x60)
+            mstore(0x40, mload(add(0x20, person)))
+            mstore(0x60, mload(add(0x40, person)))
+            mstore(0x80, nameLen)
+            mstore(0xa0, mload(add(add(nameOffset, nameLenOffset), 0x20)))
+
+            log3(0x00, 0xc0, 0x00, emitter, id)
         }
     }
 }

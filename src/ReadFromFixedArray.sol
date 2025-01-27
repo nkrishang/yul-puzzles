@@ -15,6 +15,9 @@ contract ReadFromFixedArray {
             // and return it
             // Assume `index` is <= to the length of readMe
             // Hint: https://www.rareskills.io/post/solidity-dynamic
+            let val := sload(add(readMe.slot, index))
+            mstore(0x00, val)
+            return(0x00, 0x20)
         }
     }
 }
